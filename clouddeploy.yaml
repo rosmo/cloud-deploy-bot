@@ -1,0 +1,27 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: helloworld-app
+description: main application pipeline
+serialPipeline:
+  stages:
+  - targetId: run-qsdev
+    profiles: [dev]
+  - targetId: run-qsprod
+    profiles: [prod]
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: run-qsdev
+description: Cloud Run development service
+run:
+  location: projects/taneli-joonix/locations/europe-west1
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: run-qsprod
+description: Cloud Run development service
+run:
+  location: projects/taneli-joonix/locations/europe-west1
